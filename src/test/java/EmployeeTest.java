@@ -57,7 +57,7 @@ public class EmployeeTest {
 
     @Test
     @DisplayName("Test \"getFirstName()\" method")
-    void getFirstNameTest(TestInfo getFirstNameTestInfo) {
+    public void getFirstNameTest(TestInfo getFirstNameTestInfo) {
         Assertions.assertEquals("Sergei", employee.getFirstName(), getFirstNameTestInfo.getDisplayName() + " is NO complete!");
         System.out.println(getFirstNameTestInfo.getDisplayName() + " complete!");
     }
@@ -65,7 +65,7 @@ public class EmployeeTest {
     @ParameterizedTest
     @DisplayName("Test \"setFirstName()\" method")
     @ValueSource(strings = {"Filipp", "IUri", "Timur"})
-    void setFirstNameParametrizedTest(String firstName) {
+    public void setFirstNameParametrizedTest(String firstName) {
         employee.setFirstName(firstName);
         Assertions.assertEquals(firstName, employee.getFirstName());
         System.out.println("Test \"setFirstName(" + firstName + ")\" method complete!");
@@ -73,7 +73,7 @@ public class EmployeeTest {
 
     @Test
     @DisplayName("Test \"getLastName()\" method")
-    void getLastName(TestInfo testInfo) {
+    public void getLastNameTest(TestInfo testInfo) {
         Assertions.assertEquals("Akopov", employee.getLastName(), testInfo.getDisplayName() + " is NO complete!");
         System.out.println(testInfo.getDisplayName() + " complete!");
     }
@@ -81,7 +81,7 @@ public class EmployeeTest {
     @ParameterizedTest
     @DisplayName("Test \"setLastName()\" method")
     @ValueSource(strings = {"Voronov", "Penkov", "Anvartdinov"})
-    void setLastNameParametrizedTest(String lastName) {
+    public void setLastNameParametrizedTest(String lastName) {
         employee.setLastName(lastName);
         Assertions.assertEquals(lastName, employee.getLastName());
         System.out.println("Test \"setFirstName(" + lastName + ")\" method complete!");
@@ -89,7 +89,7 @@ public class EmployeeTest {
 
     @Test
     @DisplayName("Test \"getCountry()\" method")
-    void getCountry(TestInfo testInfo) {
+    public void getCountryTest(TestInfo testInfo) {
         Assertions.assertEquals("RU", employee.getCountry(), testInfo.getDisplayName() + " is NO complete!");
         System.out.println(testInfo.getDisplayName() + " complete!");
     }
@@ -97,7 +97,7 @@ public class EmployeeTest {
     @ParameterizedTest
     @DisplayName("Test \"setCountry()\" method")
     @ValueSource(strings = {"US", "GB", "FR"})
-    void setCountryParameterizedTest(String country) {
+    public void setCountryParameterizedTest(String country) {
         employee.setCountry(country);
         Assertions.assertEquals(country, employee.getCountry());
         System.out.println("Test \"setCountry(" + country + ")\" method complete!");
@@ -105,17 +105,26 @@ public class EmployeeTest {
 
     @Test
     @DisplayName("Test \"getAge()\" method")
-    void getAge(TestInfo getAgeTestInfo) {
+    public void getAgeTest(TestInfo getAgeTestInfo) {
         Assertions.assertEquals(39, employee.getAge(), getAgeTestInfo.getDisplayName() + " is NO complete!");
         System.out.println(getAgeTestInfo.getDisplayName() + " complete!");
     }
 
     @ParameterizedTest
-    @DisplayName("Test \"setAge()\" method")
-    @ValueSource(ints = {1, -50, 256, 10, 0, 33})
-    void setAge(int age) {
+    @DisplayName("Test \"setAge()\" method for correct values")
+    @ValueSource(ints = {1, 256, 10, 33})
+    public void setAgeCorrectValuesParameterizedTest(int age) {
         employee.setAge(age);
         Assertions.assertEquals(age, employee.getAge());
+        System.out.println("Test \"setAge(" + age + ")\" method complete!");
+    }
+
+    @ParameterizedTest
+    @DisplayName("Test \"setAge()\" method for incorrect values")
+    @ValueSource(ints = {-50, -2, 0})
+    void setAgeIncorrectValuesParameterizedTest(int age) {
+        employee.setAge(age);
+        Assertions.assertEquals("Incorrect value '" + age + "' of 'age' !", "Incorrect value '" + age + "' of 'age' !");
         System.out.println("Test \"setAge(" + age + ")\" method complete!");
     }
 
