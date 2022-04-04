@@ -82,7 +82,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Test \"writeString()\" static method")
-    public void writeStringTest (TestInfo writeStringTestInfo) {
+    public void writeStringTest(TestInfo writeStringTestInfo) {
 
         // CSV --> Json
 
